@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hxty.assist">
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <!-- 唤醒手机 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!--查询安装apk权限-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!--获取运行的应用-->
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <!--应用使用记录-->
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <queries>
+        <!--快手极速版-->
+        <package android:name="com.kuaishou.nebula" />
+        <!--快手-->
+        <package android:name="com.smile.gifmaker" />
+        <!--抖音-->
+        <package android:name="com.ss.android.ugc.aweme" />
+        <!--抖音极速版-->
+        <package android:name="com.ss.android.ugc.aweme.lite" />
+        <!--今日头条-->
+        <package android:name="com.ss.android.article.news" />
+        <!--今日头条极速版-->
+        <package android:name="com.ss.android.article.lite" />
+        <!--番茄免费小说-->
+        <package android:name="com.dragon.read" />
+    </queries>
+<!-- 查询用户所有的App包 需要授权
+uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"-->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Assist">
+
+        <!--excludeFromRecents="true"任务管理器就看不到你的当前的应用
+        该 Activity 启动的后续同属一个 “Task” 的一系列 Activity 都不会出现在 Recent screens-->
+        <activity
+            android:name="com.hxty.assist.main.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".main.AutoAssistService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+        <service android:name=".main.SuspendwindowService" />
+
+    </application>
+
+</manifest>

@@ -22,7 +22,7 @@ import com.hxty.assist.utils.Utils
 /**
  * 新添加包名需要添加的地方
  * 1.Constant加入
- * 2.MainActivity加入列表
+ * 2.MainActivity加入列表               AppUtil.getInstallPkg判断
  * 3.manifest                          manifest需要写入包名申请权限<queries>
  * 3.accessibility_service_config.xml  res/accessibility_service_config.xml里面需要加上包名
  */
